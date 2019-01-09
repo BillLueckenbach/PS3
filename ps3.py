@@ -9,7 +9,6 @@
 
 import math
 import random
-import string
 
 VOWELS = 'aeiou'
 CONSONANTS = 'bcdfghjklmnpqrstvwxyz'
@@ -213,8 +212,27 @@ def is_valid_word(word, hand, word_list):
     word_list: list of lowercase strings
     returns: boolean
     """
-
-    pass  # TO DO... Remove this line when you implement this function
+    
+    if word.lower() in word_list:
+        is_valid = True
+        hand_copy = hand.copy()
+        for char in (word.lower()):
+            if char in hand_copy:
+                #Check to see if char is in hand
+                if hand_copy.get(char) >1:
+                    #more than 1 char in hand take one out
+                    hand_copy[char] -= 1
+                elif hand_copy[char] ==1:
+                    # last char remove item from dictionary
+                    del hand_copy[char]
+            else:
+                #Char not in hand
+                is_valid = False
+    else:
+        #word not in word list
+        is_valid = False
+        
+    return is_valid
 
 #
 # Problem #5: Playing a hand
